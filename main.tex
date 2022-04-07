@@ -1,0 +1,585 @@
+%% Настройки документа
+\documentclass [a4paper, 14pt] {article} %Параметры страницы
+
+\usepackage{array}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{N}{@{}m{0pt}@{}}
+\usepackage{float}
+
+%% Стандартные пакеты
+\usepackage {cmap} %Поиск в пдф
+\usepackage [T2A] {fontenc} %Кодировка
+\usepackage [utf8] {inputenc} %Кодировка исходного текста
+\usepackage [english, russian] {babel} %Локализация и переносы
+
+%% Кириллица в формулах
+\usepackage{mathtext}
+
+%% Математические пакеты 
+\usepackage{amsmath,amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{icomma} % Умная запятая 
+
+%% Шрифты
+\usepackage{euscript} % Шрифт Евклида
+\usepackage{mathrsfs} % Матшрифт
+
+\usepackage{extsizes}
+\usepackage{fancyhdr}
+
+\usepackage{graphicx}
+\usepackage{setspace}
+
+%% Графики
+\usepackage{pgfplots}
+\usepgfplotslibrary{fillbetween}
+\usetikzlibrary{patterns}
+
+\usepackage{geometry}
+\geometry{top=20mm}
+\geometry{bottom=20mm}
+\geometry{left=16mm}
+\geometry{right=16mm}
+
+\usepackage[pdf]{graphviz}
+\usepackage{morewrites}
+
+\usepackage{xpatch}
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
+\xpretocmd{\digraph}{\addFileDependency{#2.dot}}{}{}
+
+\raggedbottom
+
+\DeclareUnicodeCharacter{2212}{-}
+\begin{document}
+
+\thispagestyle{empty}
+
+\begin{center}
+	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ "НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ "МЭИ"
+\end{center}
+
+\vspace{7cm}
+
+\begin{center}
+    \Huge Отчет
+
+	\Large К домашней работе №1
+	
+	\large По теоретическим моделям вычислений
+\end{center}
+
+\vspace{2cm}
+
+\begin{flushright}
+	Выполнил
+	
+	Ушаков Н.А. 
+	
+	Студент группы А-05-19
+\end{flushright}
+
+\vfill
+\begin{center}
+	Москва 2022
+\end{center}
+
+\newpage
+
+\section*{Задание 1} 
+Построить детерменированный конечный автомат, распознающий язык:
+
+\begin{enumerate}
+    \item 
+    $L_1 = \{\omega \in \{a,b,c\}^* \enspace | \enspace |\omega|_c = 1\}$
+
+    Ответ:
+    \begin{center}
+        \digraph[scale=1] {task1ans1}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; q2;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q2 [label="c"];
+            q1->q1 [label="a,b"];
+            q2->q2 [label="a,b"];
+        } 
+    \end{center}
+
+    \item
+    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \le 2, |\omega|_b \ge 2\}$
+    \\ \\
+    Рассмотрим отдельно автоматы, распознающие языки:
+    \\ \\
+    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \le 2\}$
+    \begin{center}
+        \digraph[scale=1] {task1ans21}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; 
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q1 [label="b"];
+            q1->q2 [label="a"];
+            q2->q2 [label="b"];
+            q2->q3 [label="a"];
+            q3->q3 [label="b"];
+        } 
+    \end{center}
+    
+    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \ge 2\}$
+    \begin{center}
+        \digraph[scale=1] {task1ans22}{
+            node [shape=point]; p0;
+    	    node [shape=doublecircle]; p3;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            p0->p1;
+            p1->p1 [label="a"];
+            p1->p2 [label="b"];
+            p2->p2 [label="a"];
+            p2->p3 [label="b"];
+            p3->p3 [label="a,b"];
+        } 
+    \end{center}
+    
+    Прямое произведение ДКА:
+    
+    $\Sigma_2 = \{a,b\}, \enspace s_2 = \{q1p1\}, \enspace T_2 = \{q1p3, q2p3, q3p3\}, \enspace \delta_2 =$
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Q       & a             & b       \\ \hline
+            <q1,p1> & <q2,p1>       & <q1,p2> \\ \hline
+            <q1,p2> & <q2,p2>       & <q1,p3> \\ \hline
+            <q1,p3> & <q2,p3>       & <q1,p3> \\ \hline
+            <q2,p1> & <q3,p1>       & <q2,p2> \\ \hline
+            <q2,p2> & <q3,p2>       & <q2,p3> \\ \hline
+            <q2,p3> & <q3,p3>       & <q2,p3> \\ \hline
+            <q3,p1> & $\varnothing$ & <q3,p2> \\ \hline
+            <q3,p2> & $\varnothing$ & <q3,p3> \\ \hline
+            <q3,p3> & $\varnothing$ & <q3,p3> \\ \hline
+        \end{tabular}        
+    \end{center}
+    
+    Получаем следующий ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task1ans2}{
+            node [shape=point]; q0p0;
+    	    node [shape=doublecircle]; q1p3, q2p3, q3p3;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0p0->q1p1;
+            q1p1->q2p1 [label="a"];
+            q1p1->q1p2 [label="b"];
+            q1p2->q2p2 [label="a"];
+            q1p2->q1p3 [label="b"];
+            q1p3->q2p3 [label="a"];
+            q1p3->q1p3 [label="b"];
+            q2p1->q3p1 [label="a"];
+            q2p1->q2p2 [label="b"];
+            q2p2->q3p2 [label="a"];
+            q2p2->q2p3 [label="b"];
+            q2p3->q3p3 [label="a"];
+            q2p3->q2p3 [label="b"];
+            q3p1->q3p2 [label="b"];
+            q3p2->q3p3 [label="b"];
+            q3p3->q3p3 [label="b"];
+        } 
+    \end{center}
+        
+
+    \item 
+    $L_3 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \ne |\omega|_b\}$
+    
+    В общем случае, этот язык не описывается с помощью ДКА, поскольку необходимо запоминать количество символов a и b. Однако, если a и b чередуются, то можно построить следующий автомат:
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=1] {task1ans3}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; q2 q3;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q2 [label="a"];
+            q2->q1 [label="b"];
+            q1->q3 [label="b"];
+            q3->q1 [label="a"];
+        } 
+    \end{center}
+    
+    \item 
+    $L_4 = \{\omega \in \{a,b\}^* \enspace | \enspace \omega\omega=\omega\omega\omega\}$
+    
+    Данный язык описывает только пустое слово.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task1ans4}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle];
+    	    rankdir=LR; 
+            q0->q1;
+        } 
+    \end{center}
+    
+\end{enumerate}
+
+\section*{Задание 2}
+Построить конечный автомат, используя прямое произведение:
+
+\begin{enumerate}
+    \item 
+    $L_1 = \{\omega \in \{a,b\} \enspace | \enspace |\omega|_a \ge 2 \wedge |\omega|_b \ge 2\}$
+    \\ \\
+    Рассмотрим отдельно автоматы, распознающие языки:
+    \\ \\
+    $L_{11} = \{\omega \in \{a,b\} \enspace | \enspace |\omega|_a \ge 2\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans11}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; q3;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q2 [label="a"];
+            q1->q1 [label="b"];
+            q2->q2 [label="b"];
+            q2->q3 [label="a"];
+            q3->q3 [label="a,b"];
+        }
+    \end{center}
+        
+    $L_{12} = \{\omega \in \{a,b\} \enspace | \enspace |\omega|_b \ge 2\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans12}{
+            node [shape=point]; p0;
+    	    node [shape=doublecircle]; p3;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            p0->p1;
+            p1->p2 [label="b"];
+            p1->p1 [label="a"];
+            p2->p2 [label="a"];
+            p2->p3 [label="b"];
+            p3->p3 [label="a,b"];
+        }
+    \end{center}
+    
+    Прямое произведение ДКА:
+    
+    $\Sigma_1 = \{a,b\}, \enspace s_1 = \{q1p1\}, \enspace T_1 = \{q3p3\}, \enspace \delta_1 =$
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Q       & a       & b       \\ \hline
+            <q1,p1> & <q2,p1> & <q1,p2> \\ \hline
+            <q1,p2> & <q2,p2> & <q1,p3> \\ \hline
+            <q1,p3> & <q2,p3> & <q1,p3> \\ \hline
+            <q2,p1> & <q3,p1> & <q2,p2> \\ \hline
+            <q2,p2> & <q3,p2> & <q2,p3> \\ \hline
+            <q2,p3> & <q3,p3> & <q2,p3>  \\ \hline
+            <q3,p1> & <q3,p1> & <q3,p2> \\ \hline
+            <q3,p2> & <q3,p2> & <q3,p3> \\ \hline
+            <q3,p3> & <q3,p3> & <q3,p3> \\ \hline
+        \end{tabular}
+    \end{center}
+
+    Получаем следующий ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task2ans1}{
+            node [shape=point]; q0p0;
+        	node [shape=doublecircle]; q3p3;
+        	node [shape=circle];
+        	rankdir=LR; 
+            q0p0->q1p1;
+            q1p1->q2p1 [label="a"];
+            q1p1->q1p2 [label="b"];
+            q1p2->q2p2 [label="a"];
+            q1p2->q1p3 [label="b"];
+            q1p3->q2p3 [label="a"];
+            q1p3->q1p3 [label="b"];
+            q2p1->q3p1 [label="a"];
+            q2p1->q2p2 [label="b"];
+            q2p2->q3p2 [label="a"];
+            q2p2->q2p3 [label="b"];
+            q2p3->q3p3 [label="a"];
+            q2p3->q2p3 [label="b"];
+            q3p1->q3p1 [label="a"];
+            q3p1->q3p2 [label="b"];
+            q3p2->q3p2 [label="a"];
+            q3p2->q3p3 [label="b"];
+            q3p3->q3p3 [label="b,a"];
+        }    
+    \end{center}
+    
+    \item
+    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \ge 3 \wedge |\omega|_b \enspace \text{нечетное}\}$
+    \\ \\
+    Рассмотрим отдельно автоматы, распознающие языки:
+    \\ \\
+    $L_{21} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \ge 3\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans21}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; q4;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q1 [label="b"];
+            q1->q2 [label="a"]
+            q2->q2 [label="b"]
+            q2->q3 [label="a"]
+            q3->q3 [label="b"]
+            q3->q4 [label="a"]
+            q4->q4 [label="a,b"]
+        }
+    \end{center}
+    
+    $L_{22} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \enspace \text{нечетное}\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans22}{
+            node [shape=point]; p0;
+    	    node [shape=doublecircle]; p2;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            p0->p1;
+            p1->p1 [label="a"];
+            p1->p2 [label="b"]
+            p2->p2 [label="a"]
+            p2->p1 [label="b"]
+        }
+    \end{center}
+    
+    Прямое произведение ДКА:
+    
+    $\Sigma_2 = \{a,b\}, \enspace s_2 = \{q1p1\}, \enspace T_2 = \{q4p2\}, \enspace \delta_2 =$ 
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Q       & a       & b       \\ \hline
+            <q1,p1> & <q2,p1> & <q1,p2> \\ \hline
+            <q1,p2> & <q2,p2> & <q1,p1> \\ \hline
+            <q2,p1> & <q3,p1> & <q2,p2> \\ \hline
+            <q2,p2> & <q3,p2> & <q2,p1> \\ \hline
+            <q3,p1> & <q4,p1> & <q3,p2> \\ \hline
+            <q3,p2> & <q4,p2> & <q3,p1> \\ \hline
+            <q4,p1> & <q4,p1> & <q4,p2> \\ \hline
+            <q4,p2> & <q4,p2> & <q4,p1> \\ \hline
+        \end{tabular}
+    \end{center}
+
+    Получаем следующий ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task2ans2}{
+            node [shape=point]; q0p0;
+        	node [shape=doublecircle]; q4p2;
+        	node [shape=circle];
+        	rankdir=LR; 
+            q0p0->q1p1;
+            q1p1->q2p1 [label="a"];
+            q1p1->q1p2 [label="b"];
+            q1p2->q2p2 [label="a"];
+            q1p2->q1p1 [label="b"];
+            q2p1->q3p1 [label="a"];
+            q2p1->q2p2 [label="b"];
+            q2p2->q3p2 [label="a"];
+            q2p2->q2p1 [label="b"];
+            q3p1->q4p1 [label="a"];
+            q3p1->q3p2 [label="b"];
+            q3p2->q4p2 [label="a"];
+            q3p2->q3p1 [label="b"];
+            q4p1->q4p1 [label="a"];
+            q4p1->q4p2 [label="b"];
+            q4p2->q4p2 [label="a"];
+            q4p2->q4p1 [label="b"];
+        }    
+    \end{center}
+    
+    \item 
+    $L_3 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \enspace \text{четно} \wedge |\omega|_b \enspace \text{кратно трем}\}$
+    \\ \\
+    Рассмотрим отдельно автоматы, распознающие языки:
+    \\ \\
+    $L_{31} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \enspace \text{четно}\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans31}{
+            node [shape=point]; q0;
+    	    node [shape=doublecircle]; q1;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            q0->q1;
+            q1->q1 [label="b"];
+            q1->q2 [label="a"];
+            q2->q1 [label="a"];
+            q2->q2 [label="b"];
+        }
+    \end{center}    
+    
+    $L_{32} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \enspace \text{кратно трем}\}$
+    \begin{center}
+        \digraph[scale=1] {task2ans32}{
+            node [shape=point]; p0;
+    	    node [shape=doublecircle]; p1;
+    	    node [shape=circle];
+    	    rankdir=LR; 
+            p0->p1;
+            p1->p1 [label="a"];
+            p1->p2 [label="b"];
+            p2->p2 [label="a"];
+            p2->p3 [label="b"];
+            p3->p3 [label="a"];
+            p3->p1 [label="b"];
+        }
+    \end{center} 
+    
+    Прямое произведение ДКА:
+    
+    $\Sigma_3 = \{a,b\}, \enspace s_3 = \{q1p1\}, \enspace T_3 = \{q1p1\}, \enspace \delta_3 =$ 
+    \begin{center}
+        \begin{tabular}{|c|c|c|}
+            \hline
+            Q       & a       & b       \\ \hline
+            <q1,p1> & <q2,p1> & <q1,p2> \\ \hline
+            <q1,p2> & <q2,p2> & <q1,p3> \\ \hline
+            <q1,p3> & <q2,p3> & <q1,p1> \\ \hline
+            <q2,p1> & <q1,p1> & <q2,p2> \\ \hline
+            <q2,p2> & <q1,p2> & <q2,p3> \\ \hline
+            <q2,p3> & <q1,p3> & <q2,p1> \\ \hline
+        \end{tabular}
+    \end{center}
+
+    Получаем следующий ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task2ans3}{
+            node [shape=point]; q0p0;
+        	node [shape=doublecircle]; q1p1;
+        	node [shape=circle];
+        	rankdir=LR; 
+            q0p0->q1p1;
+            q1p1->q2p1 [label="a"];
+            q1p1->q1p2 [label="b"];
+            q1p2->q2p2 [label="a"];
+            q1p2->q1p3 [label="b"];
+            q1p3->q2p3 [label="a"];
+            q1p3->q1p1 [label="b"];
+            q2p1->q1p1 [label="a"];
+            q2p1->q2p2 [label="b"];
+            q2p2->q1p2 [label="a"];
+            q2p2->q2p3 [label="b"];
+            q2p3->q1p3 [label="a"];
+            q2p3->q2p1 [label="b"];
+        } 
+    \end{center}
+    
+    \item
+    $L_4 = \overline{L_3}$
+    \\ \\ 
+    Необходимо заменить соответствующие терминальные состояния на нетерминальные и наоборот. Получаем следующий ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.7] {task2ans4}{
+            node [shape=point]; q0p0;
+            node [shape=circle]; q1p1;
+        	node [shape=doublecircle];
+        	rankdir=LR; 
+            q0p0->q1p1;
+            q1p1->q2p1 [label="a"];
+            q1p1->q1p2 [label="b"];
+            q1p2->q2p2 [label="a"];
+            q1p2->q1p3 [label="b"];
+            q1p3->q2p3 [label="a"];
+            q1p3->q1p1 [label="b"];
+            q2p1->q1p1 [label="a"];
+            q2p1->q2p2 [label="b"];
+            q2p2->q1p2 [label="a"];
+            q2p2->q2p3 [label="b"];
+            q2p3->q1p3 [label="a"];
+            q2p3->q2p1 [label="b"];
+        } 
+    \end{center}
+    
+    \item
+    $L_5 = L_2 / L_3 = L_2 \cap \overline{L_3} = L_2 \cap L_4$
+    \\ \\
+    Для удобства поместим оба ДКА рядом и переименуем все состояния используя единичные литеры.
+    \begin{center}
+        \digraph[scale=0.7] {task2ans51}{
+            node [shape=point]; h0;
+        	node [shape=doublecircle]; h8;
+        	node [shape=circle];
+        	rankdir=LR; 
+            h0->h1;
+            h1->h2 [label="a"];
+            h1->h3 [label="b"];
+            h3->h4 [label="a"];
+            h3->h1 [label="b"];
+            h2->h5 [label="a"];
+            h2->h4 [label="b"];
+            h4->h6 [label="a"];
+            h4->h2 [label="b"];
+            h5->h7 [label="a"];
+            h5->h6 [label="b"];
+            h6->h8 [label="a"];
+            h6->h5 [label="b"];
+            h7->h7 [label="a"];
+            h7->h8 [label="b"];
+            h8->h8 [label="a"];
+            h8->h7 [label="b"];
+        }    
+        \digraph[scale=0.7] {task2ans52}{
+            node [shape=point]; g0;
+            node [shape=circle]; g1;
+        	node [shape=doublecircle];
+        	rankdir=LR; 
+            g0->g1;
+            g1->g2 [label="a"];
+            g1->g4 [label="b"];
+            g4->g3 [label="a"];
+            g4->g5 [label="b"];
+            g5->g6 [label="a"];
+            g5->g1 [label="b"];
+            g2->g1 [label="a"];
+            g2->g3 [label="b"];
+            g3->g4 [label="a"];
+            g3->g6 [label="b"];
+            g6->g5 [label="a"];
+            g6->g2 [label="b"];
+        } 
+    \end{center}
+    
+    Прямое произведение ДКА:
+    
+    $\Sigma_5 = \{a,b\}, \enspace s_5 = \{h1g1\}, \enspace T_5 = \{h8g2, h8g3, h8g4, h8g5, h8g6\}, \enspace \delta_5 =$ 
+    
+\end{enumerate}
+
+
+\section*{Задача 3}
+Построить минимальный ДКА по регулярному выражению.
+
+\begin{enumerate}
+    \item 
+    $(ab + aba)^*a$
+    
+    
+    
+\end{enumerate}
+
+
+\end{document}
