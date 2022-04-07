@@ -1,5 +1,5 @@
 %% Настройки документа
-\documentclass [a4paper, 14pt] {article} %Параметры страницы
+\documentclass[a4paper, 12pt] {article} %Параметры страницы  
 
 \usepackage{array}
 \newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
@@ -36,12 +36,14 @@
 
 \usepackage{geometry}
 \geometry{top=20mm}
-\geometry{bottom=20mm}
+\geometry{bottom=24mm}
 \geometry{left=16mm}
-\geometry{right=16mm}
+\geometry{right=18mm}
 
 \usepackage[pdf]{graphviz}
 \usepackage{morewrites}
+
+\usepackage{psfrag}
 
 \usepackage{xpatch}
 \makeatletter
@@ -53,15 +55,15 @@
 \makeatother
 \xpretocmd{\digraph}{\addFileDependency{#2.dot}}{}{}
 
+\DeclareUnicodeCharacter{2212}{-}
 \raggedbottom
 
-\DeclareUnicodeCharacter{2212}{-}
 \begin{document}
 
 \thispagestyle{empty}
 
 \begin{center}
-	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ "НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ "МЭИ"
+	ФЕДЕРАЛЬНОЕ ГОСУДАРСТВЕННОЕ БЮДЖЕТНОЕ ОБРАЗОВАТЕЛЬНОЕ УЧРЕЖДЕНИЕ ВЫСШЕГО ОБРАЗОВАНИЯ НАЦИОНАЛЬНЫЙ ИССЛЕДОВАТЕЛЬСКИЙ УНИВЕРСИТЕТ "МЭИ"
 \end{center}
 
 \vspace{7cm}
@@ -71,10 +73,10 @@
 
 	\Large К домашней работе №1
 	
-	\large По теоретическим моделям вычислений
+	\Large По теоретическим моделям вычислений
 \end{center}
 
-\vspace{2cm}
+\vspace{3cm}
 
 \begin{flushright}
 	Выполнил
@@ -100,7 +102,7 @@
 
     Ответ:
     \begin{center}
-        \digraph[scale=1] {task1ans1}{
+        \digraph[scale=0.8] {task1ans1}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; q2;
     	    node [shape=circle];
@@ -119,7 +121,7 @@
     \\ \\
     $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \le 2\}$
     \begin{center}
-        \digraph[scale=1] {task1ans21}{
+        \digraph[scale=0.8] {task1ans21}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; 
     	    rankdir=LR; 
@@ -134,7 +136,7 @@
     
     $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \ge 2\}$
     \begin{center}
-        \digraph[scale=1] {task1ans22}{
+        \digraph[scale=0.8] {task1ans22}{
             node [shape=point]; p0;
     	    node [shape=doublecircle]; p3;
     	    node [shape=circle];
@@ -171,7 +173,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task1ans2}{
+        \digraph[scale=0.65] {task1ans2}{
             node [shape=point]; q0p0;
     	    node [shape=doublecircle]; q1p3, q2p3, q3p3;
     	    node [shape=circle];
@@ -203,7 +205,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=1] {task1ans3}{
+        \digraph[scale=0.68] {task1ans3}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; q2 q3;
     	    node [shape=circle];
@@ -223,14 +225,13 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task1ans4}{
+        \digraph[scale=0.65] {task1ans4}{
             node [shape=point]; q0;
     	    node [shape=doublecircle];
     	    rankdir=LR; 
             q0->q1;
         } 
     \end{center}
-    
 \end{enumerate}
 
 \section*{Задание 2}
@@ -244,7 +245,7 @@
     \\ \\
     $L_{11} = \{\omega \in \{a,b\} \enspace | \enspace |\omega|_a \ge 2\}$
     \begin{center}
-        \digraph[scale=1] {task2ans11}{
+        \digraph[scale=0.75] {task2ans11}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; q3;
     	    node [shape=circle];
@@ -260,7 +261,7 @@
         
     $L_{12} = \{\omega \in \{a,b\} \enspace | \enspace |\omega|_b \ge 2\}$
     \begin{center}
-        \digraph[scale=1] {task2ans12}{
+        \digraph[scale=0.75] {task2ans12}{
             node [shape=point]; p0;
     	    node [shape=doublecircle]; p3;
     	    node [shape=circle];
@@ -297,7 +298,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task2ans1}{
+        \digraph[scale=0.65] {task2ans1}{
             node [shape=point]; q0p0;
         	node [shape=doublecircle]; q3p3;
         	node [shape=circle];
@@ -330,7 +331,7 @@
     \\ \\
     $L_{21} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \ge 3\}$
     \begin{center}
-        \digraph[scale=1] {task2ans21}{
+        \digraph[scale=0.7] {task2ans21}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; q4;
     	    node [shape=circle];
@@ -348,7 +349,7 @@
     
     $L_{22} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \enspace \text{нечетное}\}$
     \begin{center}
-        \digraph[scale=1] {task2ans22}{
+        \digraph[scale=0.75] {task2ans22}{
             node [shape=point]; p0;
     	    node [shape=doublecircle]; p2;
     	    node [shape=circle];
@@ -383,7 +384,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task2ans2}{
+        \digraph[scale=0.68] {task2ans2}{
             node [shape=point]; q0p0;
         	node [shape=doublecircle]; q4p2;
         	node [shape=circle];
@@ -415,7 +416,7 @@
     \\ \\
     $L_{31} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \enspace \text{четно}\}$
     \begin{center}
-        \digraph[scale=1] {task2ans31}{
+        \digraph[scale=0.75] {task2ans31}{
             node [shape=point]; q0;
     	    node [shape=doublecircle]; q1;
     	    node [shape=circle];
@@ -430,7 +431,7 @@
     
     $L_{32} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \enspace \text{кратно трем}\}$
     \begin{center}
-        \digraph[scale=1] {task2ans32}{
+        \digraph[scale=0.7] {task2ans32}{
             node [shape=point]; p0;
     	    node [shape=doublecircle]; p1;
     	    node [shape=circle];
@@ -465,7 +466,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task2ans3}{
+        \digraph[scale=0.6] {task2ans3}{
             node [shape=point]; q0p0;
         	node [shape=doublecircle]; q1p1;
         	node [shape=circle];
@@ -493,7 +494,7 @@
     
     Ответ:
     \begin{center}
-        \digraph[scale=0.7] {task2ans4}{
+        \digraph[scale=0.6] {task2ans4}{
             node [shape=point]; q0p0;
             node [shape=circle]; q1p1;
         	node [shape=doublecircle];
@@ -565,8 +566,7 @@
     
     Прямое произведение ДКА:
     
-    $\Sigma_5 = \{a,b\}, \enspace s_5 = \{h1g1\}, \enspace T_5 = \{h8g2, h8g3, h8g4, h8g5, h8g6\}, \enspace \delta_5 =$ 
-    
+    $\Sigma_5 = \{a,b\}, \enspace s_5 = \{h1g1\}, \enspace T_5 = \{h8g2, h8g3, h8g4, h8g5, h8g6\}, \enspace \delta_5$ 
 \end{enumerate}
 
 
@@ -577,9 +577,418 @@
     \item 
     $(ab + aba)^*a$
     
+    Построим НКА для заданного выражения:
+    \begin{center}
+        \digraph[scale=0.5] {task3ans11}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q12;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="lamb"];
+        	q2->q3 [label="lamb"];
+        	q3->q4 [label="a"];
+        	q4->q5 [label="b"];
+        	q5->q6 [label="lamb"];
+        	q2->q7 [label="lamb"];
+        	q7->q8 [label="a"];
+        	q8->q9 [label="b"];
+        	q9->q10 [label="a"];
+        	q10->q6 [label="lamb"];
+        	q6->q11 [label="lamb"];
+        	q6->q2 [label="lamb"];
+        	q1->q11 [label="lamb"];
+        	q11->q12 [label="a"];
+        } 
+    \end{center}
     
+    Минимизируем $\lambda$-переходы в НКА:
+    \begin{center}
+        \digraph[scale=0.6] {task3ans12}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q10;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="lamb"];
+        	q2->q3 [label="a"];
+        	q3->q4 [label="b"];
+        	q4->q5 [label="lamb"];
+        	q1->q5 [label="lamb"];
+        	q1->q6 [label="lamb"];
+        	q6->q7 [label="a"];
+        	q7->q8 [label="b"];
+        	q8->q9 [label="a"];
+        	q9->q5 [label="lamb"];
+        	q5->q1 [label="lamb"];
+        	q5->q10 [label="a"];
+        }    
+    \end{center}
     
+    Получаем ДКА по алгоритму Томпсона.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.5] {task3ans1}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q3q7q10 q3q7q9q10;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1q2q5q6;
+        	q1q2q5q6->q3q7q10 [label="a"];
+        	q3q7q10->q4q8 [label="b"];
+        	q4q8->q3q7q9q10 [label="a"];
+        	q3q7q9q10->q4q8 [label="b"];
+        	q3q7q9q10->q3q7q10 [label="a"];
+        }    
+    \end{center}
+    Данный ДКА является минимальным.\\
+    
+    \item
+    $a(a(ab)^*b)^*(ab)^*$
+    
+    НКА для регулярного выражения:
+    \begin{center}
+        \digraph[scale=0.6] {task3ans21}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q2 q6 q8;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="a"];
+        	q2->q3 [label="a"];
+        	q3->q4 [label="a"];
+        	q4->q5 [label="b"];
+        	q5->q4 [label="a"];
+        	q5->q6 [label="b"];
+        	q6->q3 [label="a"];
+        	q3->q6 [label="b"];
+        	q6->q7 [label="a"];
+        	q7->q8 [label="b"];
+        	q8->q7 [label="a"];
+        }    
+    \end{center}
+    
+    Эквивалентный ДКА:
+    \begin{center}
+        \digraph[scale=0.6] {task3ans22}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q2 q6 q6q8;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="a"];
+        	q2->q3 [label="a"];
+        	q3->q4 [label="a"];
+        	q4->q5 [label="b"];
+        	q5->q4 [label="a"];
+        	q5->q6 [label="b"];
+        	q3->q6 [label="b"];
+        	q6->q3q7 [label="a"];
+        	q3q7->q4 [label="a"];
+        	q3q7->q6q8 [label="b"];
+        	q6q8->q3q7 [label="a"];
+        }    
+    \end{center}
+    
+    Минимизируем ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.5] {task3ans2}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q2_q6_q6q8;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2_q6_q6q8 [label="a"];
+        	q2_q6_q6q8->q3_q5_q3q7 [label="a"];
+        	q3_q5_q3q7->q2_q6_q6q8 [label="b"];
+        	q3_q5_q3q7->q4 [label="a"];
+        	q4->q3_q5_q3q7 [label="b"];
+        }      
+    \end{center}
+    Данный ДКА является минимальным.\\
+    
+    \item
+    $(a + (a + b)(a + b)b)^*$
+    
+    Построим НКА для заданного выражения:
+    \begin{center}
+        \digraph[scale=0.75] {task3ans31}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q1;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q1 [label="a"];
+        	q1->q2 [label="a,b"];
+        	q2->q3 [label="a,b"];
+        	q3->q1 [label="b"];
+        }      
+    \end{center}
+    
+    Эквивалентный ДКА.
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.68] {task3ans3}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q1 q1q2 q1q3 q1q2q3;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1; 
+        	q1->q1q2 [label="a"];
+        	q1q2->q1q3 [label="a"];
+        	q1q2->q2q3 [label="b"];
+        	q1q2->q1q2q3 [label="a"];
+        	q1q2q3->q1q2q3 [label="a,b"];
+        	q2q3->q1q3 [label="b"];
+        	q2q3->q3 [label="a"];
+        	q1->q2 [label="b"];
+        	q2->q3 [label="a,b"];
+        	q3->q1 [label="b"];
+        }      
+    \end{center}
+    Данный ДКА является минимальным. \\
+    
+    \item
+    $(b + c) ((ab)^*c + (ba)^*)^*$
+    
+    В данном случае можно сразу построить ДКА:
+    \begin{center}
+        \digraph[scale=0.68] {task3ans41}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q2 q5 q7;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="b,c"];
+        	q2->q3 [label="a"];
+        	q3->q4 [label="b"];
+        	q4->q3 [label="a"];
+        	q4->q5 [label="c"];
+        	q2->q5 [label="c"];
+        	q2->q6 [label="b"];
+        	q6->q7 [label="a"];
+        	q7->q6 [label="b"];
+        	q7->q2 [label="a"];
+        	q5->q6 [label="b"];
+        	q5->q2 [label="a"];
+        }      
+    \end{center}
+    
+    Минимизируем ДКА. \\
+    
+    \item 
+    $(a + b)^+ (aa + bb + abab + baba)(a + b)^+$
+    
+    НКА для регулярного выражения:
+    \begin{center}
+        \digraph[scale=0.62] {task3ans51}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q11;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+            q1->q2 [label="a,b"];
+            q2->q1 [label="a,b"];
+            q2->q3 [label="a"];
+            q2->q4 [label="b"];
+            q3->q5 [label="b"];
+            q3->q9 [label="a"];
+            q4->q6 [label="a"];
+            q4->q10 [label="b"];
+            q5->q7 [label="a"];
+            q6->q8 [label="b"];
+            q7->q9 [label="b"];
+            q8->q10 [label="a"];
+            q9->q11 [label="a,b"];
+            q10->q11 [label="a,b"];
+            q11->q11 [label="a,b"];
+        }      
+    \end{center}
+    
+    Эквивалентный ДКА:
+    \begin{center}
+        \digraph[scale=0.22] {task3ans52}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q1q3q11, q2q5q11, q1q3q7q11, q2q9q11, q2q5q9q11, q1q4q11, q2q6q11, q1q4q8q11, q2q6q10q11, q2q10q11;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+            q1 -> q2 [label="a,b"];
+            q2 -> q1q3 [label="a"];
+            q2 -> q1q4 [label="b"];
+            q1q3 -> q2q9 [label="a"];
+            q1q3 -> q2q5 [label="b"];
+            q2q5 -> q1q3q7 [label="a"];
+            q2q5 -> q1q4 [label="b"];
+            q1q4 -> q2q6 [label="a"];
+            q1q4 -> q2q10 [label="b"];
+            q2q6 -> q1q3 [label="a"];
+            q2q6 -> q1q4q8 [label="b"];
+            q1q4q8 -> q2q6q10 [label="a"];
+            q1q4q8 -> q2q10 [label="b"];
+            q2q6q10 -> q1q3q11 [label="a"];
+            q2q6q10 -> q1q4q8q11 [label="b"];
+            q2q10 -> q1q3q11 [label="a"];
+            q2q10 -> q1q4q11 [label="b"];
+            q1q3q7 -> q2q9 [label="a"];
+            q1q3q7 -> q2q5q9 [label="b"];
+            q2q9 -> q1q3q11 [label="a"];
+            q2q9 -> q1q4q11 [label="b"];
+            q1q3q11 -> q2q9q11 [label="a"];
+            q1q3q11 -> q2q5q11 [label="b"];
+            q2q5q11 -> q1q3q7q11 [label="a"];
+            q2q5q11 -> q1q4q11 [label="b"];
+            q2q5q9 -> q1q4q11 [label="b"];
+            q2q5q9 -> q1q3q7q11 [label="a"];
+            q2q5q9 -> q1q4q11 [label="b"];
+            q1q3q7q11 -> q2q9q11 [label="a"];
+            q1q3q7q11 -> q2q5q9q11 [label="b"];
+            q2q9q11 -> q1q4q11 [label="b"];
+            q2q5q9q11 -> q1q3q7q11 [label="a"];
+            q2q5q9q11 -> q1q4q11 [label="b"];
+            q1q4q11 -> q2q6q11 [label="a"];
+            q1q4q11 -> q2q10q11 [label="b"];
+            q2q6q11 -> q1q4q8q11 [label="b"];
+            q1q4q8q11 -> q2q6q10q11 [label="a"];
+            q1q4q8q11 -> q2q10q11 [label="b"];
+            q2q6q10q11 -> q1q3q11 [label="a"];
+            q2q6q10q11 -> q1q4q8q11 [label="b"];
+            q2q10q11 -> q1q3q11 [label="a"];
+            q2q10q11 -> q1q4q11 [label="b"];
+        }       
+    \end{center}
+
+    Минимизируем ДКА и переобозначим эквивалентные состояния:
+    \begin{align*}
+        &q1 \longrightarrow h1 \\
+        &q2 \longrightarrow h2 \\
+        &q1q3 \longrightarrow h3 \\
+        &q1q4 \longrightarrow h4 \\
+        &q2q5 \longrightarrow h5 \\
+        &q2q6 \longrightarrow h6 \\
+        &q1q3q7, q1q4q8 \longrightarrow h7 \\
+        &q2q9, q2q6q10, q2q5q9, q2q10 \longrightarrow h8 \\
+        &q2q5q11, q1q3q11, q2q6q1011, q2q6q11, q1q4q8q11 \longrightarrow h9 \\
+        &q1q4q11, q2q10q11, q1q3q7q11, q2q9q11, q2q5q9q11 \longrightarrow h9 
+    \end{align*}
+    
+    Ответ:
+    \begin{center}
+        \digraph[scale=0.56] {task3ans5}{
+            node [shape=point]; h0;
+            node [shape=doublecircle]; h9;
+            node [shape=circle];
+        	rankdir=LR;
+        	h0->h1;
+        	h1 -> h2 [label="a, b"]
+            h2 -> h3 [label="a"]
+            h2 -> h4 [label="b"]
+            h3 -> h8 [label="a"]
+            h3 -> h5 [label="b"]
+            h4 -> h6 [label="a"]
+            h4 -> h8 [label="b"]
+            h5 -> h7 [label="a"]
+            h5 -> h4 [label="b"]
+            h6 -> h3 [label="a"]
+            h6 -> h7 [label="b"]
+            h7 -> h8 [label="a,b"]
+            h8 -> h9 [label="a,b"]
+            h9 -> h9 [label="a,b"]
+        }       
+    \end{center}
+    Данный ДКА является минимальным.
 \end{enumerate}
 
+\section*{Задание №4}
+Определить является ли язык регулярным или нет.
+
+\begin{enumerate}
+    \item 
+    $L_1 = \{(aab)^n b(aba)^m \enspace | \enspace n\ge 0, m\ge 0\}$
+    
+    КА, распознающий данный язык:
+    \begin{center}
+        \digraph[scale=0.6] {task4ans1}{
+            node [shape=point]; q0;
+            node [shape=doublecircle]; q8;
+            node [shape=circle];
+        	rankdir=LR;
+        	q0->q1;
+        	q1->q2 [label="a"];
+        	q2->q3 [label="a"];
+        	q3->q4 [label="b"];
+        	q1->q4 [label="lamb"];
+        	q4->q1 [label="lamb"];
+        	q4->q5 [label="b"];
+        	q5->q6 [label="a"];
+        	q6->q7 [label="b"];
+        	q7->q8 [label="a"];
+        	q5->q8 [label="lamb"];
+        	q8->q5 [label="lamb"];
+        }      
+    \end{center}
+    Язык $L_1$ является регулярным. \\
+    
+    \item 
+    $L = \{uaav \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, |u|_b \ge |v|_a \}$
+    
+    Лемма о разрастании:
+    \begin{center}
+        $L - \text{регулярный над } \Sigma \Rightarrow \exists n \enspace \forall \omega \in L, \enspace |\omega| \ge n$ \\
+        $\exists \enspace x,y,z \enspace \omega = xyz \enspace |xy| \le n \enspace y \ne \lambda \enspace \forall \enspace k \ge 0 \enspace xy^kz \in L$
+    \end{center}
+    
+    Фиксируем $\forall n \in \mathbb{N}$. Положим $\omega = b^n aaa^n, |\omega| = 2n+2 \ge n$.
+    \begin{align*}
+        &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = b^m, y = b^l, z = b^{n-m-l}aaa^n \\
+        &m+l \le n, l \ne 0 \enspace \omega = xy^kz = b^{m}b^{kl}b^{n-m-l}aaa^n \\
+        &\text{Положим: } k=0, \text{тогда: } \omega = b^{n-l}aaa^n \notin L, l \ne 0
+    \end{align*}
+    Лемма не выполняется, следовательно, язык не является регулярным. \\
+
+    \item 
+    $L = \{a^m\omega \enspace | \enspace \omega \in \{a,b\}^*, 1 \le |\omega|_b \le m\}$
+    
+    Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. Положим $\omega = a^n b^n, |\omega| = 2n \ge n$.
+    \begin{align*}
+        &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = a^m, y = a^l, z = a^{n-m-l}b^n \\
+        &m+l \le n, l \ne 0 \enspace \omega = xy^kz = a^{m}a^{kl}a^{n-m-l}b^n \\
+        &\text{Положим: } k=0, \text{тогда: } \omega = a^{n-l}b^n \notin L, l \ne 0
+    \end{align*}
+    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    
+    \item 
+    $L = \{a^k b^m a^n \enspace | \enspace k = n \vee m > 0\}$
+    
+    Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. Положим $\omega = a^n ba^n, |\omega| = 2n+1 \ge n$.
+    \begin{align*}
+        &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = a^m, y = a^l, z = a^{n-m-l}ba^n \\
+        &m+l \le n, l \ne 0 \enspace \omega = xy^kz = a^{m}a^{kl}a^{n-m-l}ba^n \\
+        &\text{Положим: } k=2, \text{тогда: } \omega = a^{n+l}ba^n \notin L, l \ne 0
+    \end{align*}
+    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    
+    \item 
+    $L = \{ucv \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, u \ne v^R\}$
+    
+    Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. 
+    
+    Положим $\omega = (ab)^n c(ab)^n = \alpha_1\alpha_2\dots\alpha_{4n+1}, |\omega| = 4n+1 \ge n$.
+    \begin{align*}
+        &\omega = xyz, |y| \ne 0, |xy| \le n : \\
+        &x = \alpha_1\dots\alpha_m, y = \alpha_{m+1}\dots\alpha_{m+l}, z = \alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n \\
+        &m+l \le n, l \ne 0 \\
+        &\omega = xy^kz = (\alpha_1\dots\alpha_m)(\alpha_{m+1}\dots\alpha_{m+l})^k, 
+        (\alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n) \\
+        &\text{Положим: } k=2, \text{тогда: } \\
+        &\omega = (\alpha_1\dots\alpha_m)(\alpha_{m+1}\dots\alpha_{m+l})^2, 
+        (\alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n) \notin L, l \ne 0
+    \end{align*}
+    Лемма не выполняется, следовательно, язык не является регулярным. \\
+\end{enumerate}
 
 \end{document}
