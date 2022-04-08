@@ -119,7 +119,7 @@
     \\ \\
     Рассмотрим отдельно автоматы, распознающие языки:
     \\ \\
-    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \le 2\}$
+    $L_{21} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_a \le 2\}$
     \begin{center}
         \digraph[scale=0.8] {task1ans21}{
             node [shape=point]; q0;
@@ -134,7 +134,7 @@
         } 
     \end{center}
     
-    $L_2 = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \ge 2\}$
+    $L_{22} = \{\omega \in \{a,b\}^* \enspace | \enspace |\omega|_b \ge 2\}$
     \begin{center}
         \digraph[scale=0.8] {task1ans22}{
             node [shape=point]; p0;
@@ -931,10 +931,10 @@
         	q8->q5 [label="lamb"];
         }      
     \end{center}
-    Язык $L_1$ является регулярным. \\
+    Соответственно, язык $L_1$ является регулярным. \\
     
     \item 
-    $L = \{uaav \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, |u|_b \ge |v|_a \}$
+    $L_2 = \{uaav \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, |u|_b \ge |v|_a \}$
     
     Лемма о разрастании:
     \begin{center}
@@ -946,34 +946,34 @@
     \begin{align*}
         &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = b^m, y = b^l, z = b^{n-m-l}aaa^n \\
         &m+l \le n, l \ne 0 \enspace \omega = xy^kz = b^{m}b^{kl}b^{n-m-l}aaa^n \\
-        &\text{Положим: } k=0, \text{тогда: } \omega = b^{n-l}aaa^n \notin L, l \ne 0
+        &\text{Положим: } k=0, \text{тогда: } \omega = b^{n-l}aaa^n \notin L_2, l \ne 0
     \end{align*}
-    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    Лемма не выполняется, следовательно, язык $L_2$ не является регулярным. \\
 
     \item 
-    $L = \{a^m\omega \enspace | \enspace \omega \in \{a,b\}^*, 1 \le |\omega|_b \le m\}$
+    $L_3 = \{a^m\omega \enspace | \enspace \omega \in \{a,b\}^*, 1 \le |\omega|_b \le m\}$
     
     Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. Положим $\omega = a^n b^n, |\omega| = 2n \ge n$.
     \begin{align*}
         &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = a^m, y = a^l, z = a^{n-m-l}b^n \\
         &m+l \le n, l \ne 0 \enspace \omega = xy^kz = a^{m}a^{kl}a^{n-m-l}b^n \\
-        &\text{Положим: } k=0, \text{тогда: } \omega = a^{n-l}b^n \notin L, l \ne 0
+        &\text{Положим: } k=0, \text{тогда: } \omega = a^{n-l}b^n \notin L_3, l \ne 0
     \end{align*}
-    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    Лемма не выполняется, следовательно, язык $L_3$ не является регулярным. \\
     
     \item 
-    $L = \{a^k b^m a^n \enspace | \enspace k = n \vee m > 0\}$
+    $L_4 = \{a^k b^m a^n \enspace | \enspace k = n \vee m > 0\}$
     
     Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. Положим $\omega = a^n ba^n, |\omega| = 2n+1 \ge n$.
     \begin{align*}
         &\omega = xyz, |y| \ne 0, |xy| \le n : \enspace x = a^m, y = a^l, z = a^{n-m-l}ba^n \\
         &m+l \le n, l \ne 0 \enspace \omega = xy^kz = a^{m}a^{kl}a^{n-m-l}ba^n \\
-        &\text{Положим: } k=2, \text{тогда: } \omega = a^{n+l}ba^n \notin L, l \ne 0
+        &\text{Положим: } k=2, \text{тогда: } \omega = a^{n+l}ba^n \notin L_4, l \ne 0
     \end{align*}
-    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    Лемма не выполняется, следовательно, язык $L_4$ не является регулярным. \\
     
     \item 
-    $L = \{ucv \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, u \ne v^R\}$
+    $L_5 = \{ucv \enspace | \enspace u \in \{a,b\}^*, v \in \{a,b\}^*, u \ne v^R\}$
     
     Лемма о разрастании. Фиксируем $\forall n \in \mathbb{N}$. 
     
@@ -986,9 +986,9 @@
         (\alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n) \\
         &\text{Положим: } k=2, \text{тогда: } \\
         &\omega = (\alpha_1\dots\alpha_m)(\alpha_{m+1}\dots\alpha_{m+l})^2, 
-        (\alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n) \notin L, l \ne 0
+        (\alpha_{m+l+1}\dots\alpha_{4n+1} c(ab)^n) \notin L_5, l \ne 0
     \end{align*}
-    Лемма не выполняется, следовательно, язык не является регулярным. \\
+    Лемма не выполняется, следовательно, язык $L_5$ не является регулярным. \\
 \end{enumerate}
 
 \end{document}
