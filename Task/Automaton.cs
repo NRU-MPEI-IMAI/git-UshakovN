@@ -4,12 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.IO;
 using System.Text;
+using System.Globalization;
 
 namespace Task
 {
     internal class Automaton
     {
-        private readonly string Directory = 
+        private static readonly string Dir = 
             Path.Combine("..\\..\\Output");
 
         private List<string> Alphabet;
@@ -72,15 +73,22 @@ namespace Task
 
         public Automaton Difference(Automaton DFA)
         {
-            DFA.Negation();
-            return CrossProduct(DFA);
+            Automaton negate = DFA.Negation();
+            return CrossProduct(negate);
         }
 
         public Automaton Negation()
         {
-            Automaton negate = this;
-            negate.TerminalStates = States;
-            negate.States = TerminalStates;
+            List<string> negateStates = new(States);
+            negateStates.RemoveAll(x => TerminalStates.Contains(x));
+
+            Automaton negate = new(
+                Alphabet,
+                States, 
+                StartState,
+                negateStates, 
+                TransitionMatrix);
+
             return negate;
         }
 
@@ -94,14 +102,14 @@ namespace Task
 
             foreach (var stateSource in States)
                 foreach (var terminalUnit in DFA.TerminalStates)
-                    unit.TerminalStates.Add(terminalUnit + stateSource);
+                    unit.TerminalStates.Add(stateSource + terminalUnit);
 
             return unit;
         }
 
-        public void CreateDOT(string fileName)
+        private void CreateDOT(string fileName)
         {
-            var path = Path.Combine(Directory, fileName + ".dot");
+            var path = Path.Combine(Dir, $"{fileName}.dot");
             File.Create(path).Dispose();
             using StreamWriter stream = new(path);
 
@@ -128,9 +136,9 @@ namespace Task
             stream.Close();
         }
 
-        public bool CompileSVG(string fileName)
+        private bool CompileSVG(string fileName, bool removeDot = true)
         {
-            var path = Path.Combine(Directory, $"{fileName}.dot");
+            var path = Path.Combine(Dir, $"{fileName}.dot");
             if (File.Exists(path))
             {
                 var compile = $"dot -Tsvg {path} > {path.Replace(".dot", ".svg")} & exit";
@@ -142,18 +150,56 @@ namespace Task
                     CreateNoWindow = true
                 });
                 process.WaitForExit();
+                if (removeDot)
+                    File.Delete(path);
                 if (process.ExitCode.Equals(0))
                     return true;
             }
             return false;
         }
 
-        public bool GenerateAutomaton(string modelName)
+        public bool GenerateAutomaton(string modelName = null, bool removeDot = true)
         {
+            modelName ??= GetType().Name.ToLower();
             CreateDOT(modelName);
-            if (CompileSVG(modelName))
+            if (CompileSVG(modelName, removeDot))
                 return true;
             return false;
+        }
+
+        public static bool GenerateGroup(params Automaton[] automatonModels)
+        {
+            int id = 0;
+            foreach (var model in automatonModels)
+            {
+                if (!model.GenerateAutomaton($"{model.GetType().Name.ToLower()}{++id}"))
+                    return false;
+            }
+            return true;
+        }
+
+        public void MakeReport(Automaton DFA, string fileName = "report")
+        {
+            var path = Path.Combine(Dir, $"{fileName}.md");
+            File.Create(path).Dispose();
+            using StreamWriter stream = new(path);
+
+            var today = DateTime.Today.ToString("D", CultureInfo.GetCultureInfo("en-US"));
+            stream.Write($"The report was generated on: {today}\r\n" +
+                "#Automatons\r\n\r\n");
+
+            if (CrossProduct(DFA).GenerateAutomaton("cross-product") &&
+                Union(DFA).GenerateAutomaton("union") &&
+                Difference(DFA).GenerateAutomaton("difference"))
+            {
+                string localPath = Dir.Replace("..\\", "./");
+                stream.Write($"![]({localPath}/cross-product.svg)\r\n" +
+                    $"![]({localPath}/union.svg)\r\n" +
+                    $"![]({localPath}/difference.svg)\r\n" +
+                    "\r\nEnd report");
+            }
+            else stream.Write("##Internal error");
+            stream.Close();
         }
     }
 }

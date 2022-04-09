@@ -11,7 +11,7 @@ namespace Task
 
         private void BtnMock_Click(object sender, EventArgs e)
         {
-            Automaton Mock1 = new(
+            Automaton FirstMock = new(
                 new List<string> {
                     "a", "b"
                 },
@@ -19,7 +19,7 @@ namespace Task
                     "q1", "q2", "q3", "q4"
                 },
                 "q1",
-                new List<string> { 
+                new List<string> {
                     "q4"
                 },
                 new string[,] {
@@ -29,7 +29,7 @@ namespace Task
                     { "q4", "q4" }
                 });
 
-            Automaton Mock2 = new(
+            Automaton SecondMock = new(
                 new List<string> {
                     "a", "b"
                 },
@@ -45,9 +45,20 @@ namespace Task
                     { "p2", "p1" }
                 });
 
-            Automaton Mock = Mock1.CrossProduct(Mock2);
-            if (Mock.GenerateAutomaton("Mock"))
-                MessageBox.Show("Verify");
+            Automaton ProductMock = FirstMock.CrossProduct(SecondMock);
+            Automaton DifferenceMock = FirstMock.Difference(SecondMock);
+            Automaton UnionMock = FirstMock.Union(SecondMock);
+            Automaton NegateMock = FirstMock.Negation();
+
+            if (Automaton.GenerateGroup(
+                ProductMock, 
+                DifferenceMock, 
+                UnionMock, 
+                NegateMock))
+            {
+                MessageBox.Show("Complete");
+            }
+            FirstMock.MakeReport(SecondMock);     
         }
     }
 }
