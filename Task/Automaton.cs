@@ -186,17 +186,17 @@ namespace Task
 
             var today = DateTime.Today.ToString("D", CultureInfo.GetCultureInfo("en-US"));
             stream.Write($"The report was generated on: {today}\r\n" +
-                "#Automatons\r\n\r\n");
+                "# Automatons\r\n\r\n");
 
             if (CrossProduct(DFA).GenerateAutomaton("cross-product") &&
                 Union(DFA).GenerateAutomaton("union") &&
                 Difference(DFA).GenerateAutomaton("difference"))
             {
                 string localPath = Dir.Replace("..\\", "./");
-                stream.Write($"![]({localPath}/cross-product.svg)\r\n" +
-                    $"![]({localPath}/union.svg)\r\n" +
-                    $"![]({localPath}/difference.svg)\r\n" +
-                    "\r\nEnd report");
+                stream.Write($"![](cross-product.svg)\r\n" +
+                    $"![](union.svg)\r\n" +
+                    $"![](difference.svg)\r\n" +
+                    "\r\n## End report");
             }
             else stream.Write("##Internal error");
             stream.Close();

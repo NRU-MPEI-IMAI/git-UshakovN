@@ -1,8 +1,8 @@
 The report was generated on: Saturday, April 9, 2022
-#Automatons
+# Automatons
 
-![](././Output/cross-product.svg)
-![](././Output/union.svg)
-![](././Output/difference.svg)
+![](cross-product.svg)
+![](union.svg)
+![](difference.svg)
 
-End report
+## End report
